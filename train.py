@@ -51,9 +51,6 @@ def train():
                 visualizer.update(batch_idx, running_loss / 100)
                 running_loss = 0.0
 
-            # 5. Validation (Test the model after each epoch)
-            visualizer.show()
-
         # 5. Validation (Test the model after each epoch)
         model.eval()  # Set model to evaluation mode
         correct = 0
@@ -69,6 +66,18 @@ def train():
         print(
             f"\nEpoch {epoch + 1} Summary: Accuracy: {100.0 * correct / len(test_loader.dataset):.2f}%\n"
         )
+
+        # --- X-RAY VISUALIZATION STEP ---
+        print("Generating layer visualization for a test sample...")
+        spy = vis.FeatureSpy(model)
+        spy.register_hooks()
+
+        # Grab one sample from the test set to see what the model "sees"
+        for data, target in test_loader:
+            data, target = data.to(device), target.to(device)
+            spy.visualize_layers(data[0], target[0].item())
+            break  # Just do one image per epoch
+        # --------------------------------
 
 
 if __name__ == "__main__":
