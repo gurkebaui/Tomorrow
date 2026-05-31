@@ -4,3 +4,4 @@ import numpy as np
 
 np.add(1, 2)
 print(f"np.add(1,2) = {np.add(1, 2)}")
+print("hello world")
