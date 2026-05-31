@@ -77,6 +77,10 @@ def train():
             data, target = data.to(device), target.to(device)
             spy.visualize_layers(data[0], target[0].item())
             break  # Just do one image per epoch
+
+        import matplotlib.pyplot as plt
+
+        plt.close("all")
         # --------------------------------
 
 
