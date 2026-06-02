@@ -1,3 +1,4 @@
+import torch
 from transformers import AutoModelForCausalLM, AutoTokenizer
 
 model_name = "Qwen/Qwen2.5-0.5B"  # Model
@@ -15,7 +16,6 @@ inputs = tokenizer(text, return_tensors="pt").to(
     model.device
 )  # tokenize and move to device
 
-import torch
 
 # Run inference without gradient calculation
 with torch.no_grad():
